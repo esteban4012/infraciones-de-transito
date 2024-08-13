@@ -1,0 +1,18 @@
+services:
+  base-datos:
+    image: postgres
+    container_name: mi_contenedor
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=infraccion
+
+  backend:
+    build: .
+    volumes:
+      - .:/infraccion
+    ports:
+      - 8000:8000
+    depends_on:
+      - base-datos
